@@ -1,10 +1,11 @@
 class CashesController < ApplicationController
+  before_filter :authorize_company
   before_action :set_cash, only: [:show, :edit, :update, :destroy]
 
   # GET /cashes
   # GET /cashes.json
   def index
-    @cashes = Cash.all
+    @cashes = current_company.cashes
   end
 
   # GET /cashes/1
@@ -14,17 +15,18 @@ class CashesController < ApplicationController
 
   # GET /cashes/new
   def new
-    @cash = Cash.new
+    @cash = current_company.cashes.build
   end
 
   # GET /cashes/1/edit
   def edit
+    @cash = current_company.cashes.find(params[:id])
   end
 
   # POST /cashes
   # POST /cashes.json
   def create
-    @cash = Cash.new(cash_params)
+    @cash = current_company.cashes.build(cash_params)
 
     respond_to do |format|
       if @cash.save
@@ -40,6 +42,7 @@ class CashesController < ApplicationController
   # PATCH/PUT /cashes/1
   # PATCH/PUT /cashes/1.json
   def update
+    @cash = current_company.cashes.find(params[:id])
     respond_to do |format|
       if @cash.update(cash_params)
         format.html { redirect_to @cash, notice: 'Cash was successfully updated.' }
@@ -54,6 +57,7 @@ class CashesController < ApplicationController
   # DELETE /cashes/1
   # DELETE /cashes/1.json
   def destroy
+    @cash = current_company.cashes.find(params[:id])
     @cash.destroy
     respond_to do |format|
       format.html { redirect_to cashes_url, notice: 'Cash was successfully destroyed.' }
@@ -72,3 +76,8 @@ class CashesController < ApplicationController
       params.require(:cash).permit(:value)
     end
 end
+
+
+#   current_company.employees.each do |employee|
+#     employee.cashes.sum :value
+#   end

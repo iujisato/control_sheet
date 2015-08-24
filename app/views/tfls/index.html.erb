@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Tfls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tfls.each do |tfl| %>
+      <tr>
+        <td><%= tfl.name %></td>
+        <td><%= link_to 'Show', tfl %></td>
+        <td><%= link_to 'Edit', edit_tfl_path(tfl) %></td>
+        <td><%= link_to 'Destroy', tfl, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tfl', new_tfl_path %>

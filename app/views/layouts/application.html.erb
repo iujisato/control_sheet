@@ -52,6 +52,8 @@
             <% if current_company %>
               <li><a>Logged as <%= current_company.name %></a></li>
               <li><%= link_to 'Employees', employees_path %></li>
+              <li><%= link_to 'TFL', tfls_path %></li>
+              <li><%= link_to 'Cash', cashes_path %></li>
               <li><%= link_to 'Logout', companies_login_path, method: :delete, confirm: "Are you sure?" %></li>
            
             <% else %>

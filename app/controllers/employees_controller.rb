@@ -76,9 +76,4 @@ class EmployeesController < ApplicationController
       params.require(:employee).permit(:name, :telephone, :cellphone)
     end
 
-    def authorize_company
-    unless current_company
-      redirect_to root_path, alert: "You need to login to continue."
-    end
-  end
 end

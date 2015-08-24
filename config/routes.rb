@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   
   
+  resources :tfls
   get '/companies/login' => 'login#new'
   post '/companies/login' => 'login#create'
   delete "/companies/login", to: "login#destroy"

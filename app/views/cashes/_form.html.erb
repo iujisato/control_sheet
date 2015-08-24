@@ -15,6 +15,11 @@
     <%= f.label :value %><br>
     <%= f.number_field :value %>
   </div>
+  <div class="field">
+    <%= f.label :employee %><br>
+    <%= f.select :employee_id, current_company.employees.collect { |employee| [ employee.name, employee.id ] } %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
