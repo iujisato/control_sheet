@@ -5,7 +5,7 @@ class CashesController < ApplicationController
   # GET /cashes
   # GET /cashes.json
   def index
-    @cashes = current_company.cashes
+    @cashes = current_company.cashes.where "created_at LIKE ?", "%#{Date.today.to_s(:db)}%"
   end
 
   # GET /cashes/1
@@ -16,6 +16,7 @@ class CashesController < ApplicationController
   # GET /cashes/new
   def new
     @cash = current_company.cashes.build
+    @employee = Employee.all
   end
 
   # GET /cashes/1/edit
@@ -73,7 +74,7 @@ class CashesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cash_params
-      params.require(:cash).permit(:value)
+      params.require(:cash).permit(:value, :employee_id, :company_id)
     end
 end
 

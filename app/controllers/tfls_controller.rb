@@ -72,6 +72,6 @@ class TflsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tfl_params
-      params.require(:tfl).permit(:name)
+      params.require(:tfl).permit(:name, :employee_id)
     end
 end

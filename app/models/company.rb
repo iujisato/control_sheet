@@ -4,6 +4,7 @@ class Company < ActiveRecord::Base
   has_many :cashes
   has_many :tfls
   has_many :employees
+  has_many :reports
   validates_presence_of :name
 
   def password=(new_password)

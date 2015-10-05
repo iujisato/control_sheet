@@ -4,6 +4,14 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   # GET /employees.json
+
+  
+  def report
+    @employees = current_company.employees.joins(:cashes).distinct.where(["cashes.created_at LIKE ?", "%#{Date.today.to_s(:db)}%"])
+
+    # current_compan.joins(:cashes).where(cashes: ["created_at LIKE ?", "%#{Date.today.to_s(:db)}%"])
+  end
+
   def index
     @employees = current_company.employees
   end
@@ -73,7 +81,7 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:name, :telephone, :cellphone)
+      params.require(:employee).permit(:name, :contact, :tfl_id)
     end
 
 end

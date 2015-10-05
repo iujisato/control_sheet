@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824031307) do
+ActiveRecord::Schema.define(version: 20150826110210) do
 
   create_table "cashes", force: :cascade do |t|
     t.integer  "value"
@@ -35,12 +35,11 @@ ActiveRecord::Schema.define(version: 20150824031307) do
 
   create_table "employees", force: :cascade do |t|
     t.string   "name"
-    t.string   "telephone"
-    t.string   "cellphone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "company_id"
     t.integer  "tfl_id"
+    t.text     "contact"
   end
 
   add_index "employees", ["company_id"], name: "index_employees_on_company_id"

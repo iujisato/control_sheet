@@ -1,0 +1,47 @@
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% @employees.each do |employee| %>
+        <th colspan="2"><%= employee.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <%= "total = #{total(@employees)}" %>
+      
+      <% @employees.each do |employee| %>
+        <td colspan="2"> 
+          <%= employee
+           .cashes
+           .where(["created_at LIKE ?", "%#{Date.today.to_s(:db)}%"])
+           .sum(:value)
+          %> </td>
+      <% end %>
+    </tr>
+    <% if @employees.present? %> 
+    <% total = @employees.joins(:cashes)
+                         .select('employees.id, count(0) AS total')          
+                         .group('employees.id')
+                         .order('total desc')
+                         .first
+                         .total %>
+
+    <% total.times do |t| %>
+      <tr>
+        <% @employees.each do |employee| %>
+          <% if employee.cashes.where(["created_at LIKE ?", "%#{Date.today.to_s(:db)}%"])[t].present? %>
+            <td> <%= employee.cashes.where(["created_at LIKE ?", "%#{Date.today.to_s(:db)}%"])[t].value %></td>
+            <td> <%= employee.cashes.where(["created_at LIKE ?", "%#{Date.today.to_s(:db)}%"])[t].created_at.to_time.strftime('%H:%M') %></td>
+          <% else %>
+            <td> ------ </td>
+            <td> -------- </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>

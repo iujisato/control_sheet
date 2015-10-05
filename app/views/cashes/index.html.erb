@@ -1,27 +1,36 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Cashes</h1>
-
-<table>
+<%- model_class = Cash -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Value</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:value) %></th>
+      <th><%= model_class.human_attribute_name(:employee_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @cashes.each do |cash| %>
       <tr>
-        <td><%= cash.value %></td>
-        <td><%= link_to 'Show', cash %></td>
-        <td><%= link_to 'Edit', edit_cash_path(cash) %></td>
-        <td><%= link_to 'Destroy', cash, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to cash.value, cash_path(cash) %></td>
+        <td><%= cash.employee.name rescue '' %></td>
+        <td><%= cash.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_cash_path(cash), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      cash_path(cash),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Cash', new_cash_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_cash_path,
+            :class => 'btn btn-primary' %>

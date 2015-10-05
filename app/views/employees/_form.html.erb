@@ -23,20 +23,13 @@
     <%= error_span(@employee[:name]) %>
   </div>
   <div class="control-group">
-    <%= f.label :telephone, :class => 'control-label' %>
+    <%= f.label :contact, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :telephone, :class => 'form-control' %>
+      <%= f.text_area :contact, :rows => '4', :class => 'form-control' %>
     </div>
-    <%= error_span(@employee[:telephone]) %>
+    <%= error_span(@employee[:contact]) %>
   </div>
   <div class="control-group">
-    <%= f.label :cellphone, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :cellphone, :class => 'form-control' %>
-    </div>
-    <%= error_span(@employee[:cellphone]) %>
-  </div>
-    <div class="control-group">
     <%= f.label :tfl, :class => 'control-label' %>
     <div class="controls">
       <%= f.select :tfl_id, current_company.tfls.collect { |tfl| [ tfl.name, tfl.id ] }, :class => 'form-control' %>

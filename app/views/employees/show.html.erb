@@ -6,10 +6,8 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @employee.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:telephone) %>:</strong></dt>
-  <dd><%= @employee.telephone %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cellphone) %>:</strong></dt>
-  <dd><%= @employee.cellphone %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:contact) %>:</strong></dt>
+  <dd><%= @employee.contact %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
